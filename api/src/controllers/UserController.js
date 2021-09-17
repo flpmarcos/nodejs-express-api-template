@@ -1,8 +1,13 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 module.exports = {
+    async welcome(req,res){
+      res.status(200).send("Welcome 🙌 ");
+    },
+
     async index(req, res){
         /* #swagger.tags = ['User']
         #swagger.description = 'Endpoint para adicionar um usuário.' */
@@ -26,6 +31,8 @@ module.exports = {
         // const products = await Product.paginate({}, { page, limit : 10});
         // return res.json(products);
     },   
+
+
     async show(req, res){
         // #swagger.tags = ['User']
         // #swagger.description = 'Endpoint para obter um usuário.'
@@ -49,6 +56,8 @@ module.exports = {
         // const product = await Product.findById(req.params.id);
         // return res.json(product);
     },
+
+
     async login(req, res){
         // Our login logic starts here
         try {
@@ -84,7 +93,10 @@ module.exports = {
       }
       // Our register logic ends here
     },
+
+
     async register(req, res){
+        console.log(process.env.TOKEN_KEY);
         // Our register logic starts here
         try {
         // Get user input
@@ -117,6 +129,7 @@ module.exports = {
         // Create token
         const token = jwt.sign(
           { user_id: user._id, email },
+          
           process.env.TOKEN_KEY,
           {
             expiresIn: "2h",

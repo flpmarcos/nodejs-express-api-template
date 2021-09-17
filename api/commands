@@ -1,3 +1,7 @@
+// MongoDB docker commands
+docker run --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=teste -e MONGO_INITDB_ROOT_PASSWORD=12345 mongo
+
+
 // Gerar migrate
 node_modules/.bin/sequelize migration:create --name=create-users
 node_modules/.bin/sequelize db:migrate
